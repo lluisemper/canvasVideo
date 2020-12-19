@@ -53,6 +53,14 @@ photoButton.addEventListener(
   false
 );
 
+photoFilter.addEventListener("change", (e) => {
+  // Change filter to choosen option
+  filter = e.target.value;
+  //Set filter to video
+  video.style.filter = filter;
+  e.preventDefault();
+});
+
 const takePicture = () => {
   //Create canvas
   const context = canvas.getContext("2d");
@@ -61,6 +69,10 @@ const takePicture = () => {
     canvas.width = width;
     canvas.height = height;
     //Draw image of the video on the canvas
+    context.filter = filter;
     context.drawImage(video, 0, 0, width, height);
+
+    //Create image from the canvas => Base64
+    const imgUrl = canvas.toDataURL("image/png");
   }
 };
