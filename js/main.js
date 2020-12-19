@@ -74,5 +74,12 @@ const takePicture = () => {
 
     //Create image from the canvas => Base64
     const imgUrl = canvas.toDataURL("image/png");
+    //Test That the filter has been added to the generated image
+    // Create img element
+    const img = document.createElement("img");
+    // Set img src
+    img.setAttribute("src", imgUrl);
+    // Add image to photos
+    photos.appendChild(img);
   }
 };
