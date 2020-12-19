@@ -24,3 +24,43 @@ navigator.mediaDevices
   .catch((err) => {
     console.log("err", err);
   });
+
+//Play when ready
+video.addEventListener(
+  "canplay",
+  (e) => {
+    if (!streaming) {
+      //Set video / canvas height
+      height = video.videoHeight / (video.videoWidth / width);
+
+      video.setAttribute("width", width);
+      video.setAttribute("height", height);
+      canvas.setAttribute("width", width);
+      canvas.setAttribute("height", height);
+
+      streaming = true;
+    }
+  },
+  false
+);
+
+photoButton.addEventListener(
+  "click",
+  (e) => {
+    takePicture();
+    e.preventDefault();
+  },
+  false
+);
+
+const takePicture = () => {
+  //Create canvas
+  const context = canvas.getContext("2d");
+  if (width && height) {
+    //Set canvas props
+    canvas.width = width;
+    canvas.height = height;
+    //Draw image of the video on the canvas
+    context.drawImage(video, 0, 0, width, height);
+  }
+};
